@@ -36,7 +36,6 @@ TrMatrix<T>::TrMatrix(T* const& arr,
         }
 
         tr_names[i] = transition_names[i];
-        std::cout << tr_names[i] << '\n';
     }
 }
 
