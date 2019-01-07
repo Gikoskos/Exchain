@@ -3,7 +3,7 @@
 
 #include <cstddef>
 #include <string>
-#include "flatmatrix.h"
+#include <mchain/flatmatrix.h>
 
 
 template <class T>

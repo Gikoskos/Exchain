@@ -5,8 +5,8 @@
 #include <string>
 #include <array>
 #include <memory>
-#include "trmatrix.h"
-#include "randgen.h"
+#include <mchain/trmatrix.h>
+#include <mchain/randgen.h>
 
 class MChain {
     const RandGen rg;

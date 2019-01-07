@@ -2,7 +2,7 @@
 #include <random>
 #include <cassert>
 #include <stdexcept>
-#include "mchain.h"
+#include "mchain/mchain.h"
 
 #define ARR2D_COLS(x) (sizeof((x)[0]) / sizeof((x)[0][0]))
 #define ARR2D_ROWS(x) (sizeof((x)) / sizeof((x)[0]))

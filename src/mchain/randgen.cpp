@@ -1,4 +1,4 @@
-#include "randgen.h"
+#include "mchain/randgen.h"
 #include <random>
 
 #ifdef __MINGW32__

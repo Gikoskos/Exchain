@@ -1,4 +1,4 @@
-#include "mchain.h"
+#include "mchain/mchain.h"
 #include <cassert>
 #include <stdexcept>
 

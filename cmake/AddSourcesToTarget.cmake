@@ -1,0 +1,7 @@
+function(AddSourcesToTarget srclist target)
+    #cmake_print_variables(${srclist})
+    #cmake_print_variables(${target})
+    foreach(i IN LISTS ${srclist})
+        target_sources(${target} PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/${i}")
+    endforeach()
+endfunction()
