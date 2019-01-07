@@ -1,4 +1,4 @@
-set(hdrs
+AddSourcesToTarget(Exchain
     flatmatrix.h
     flatmatrix.tpp
     mchain.h
@@ -6,5 +6,3 @@ set(hdrs
     trmatrix.h
     trmatrix.tpp
 )
-
-AddSourcesToTarget(hdrs Exchain)

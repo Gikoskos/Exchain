@@ -1,7 +1,5 @@
-set(srcs
+AddSourcesToTarget(Exchain
     randgen.cpp
     mchain.cpp
     tests.cpp
 )
-
-AddSourcesToTarget(srcs Exchain)

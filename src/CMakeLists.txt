@@ -1,7 +1,5 @@
 add_subdirectory(mchain)
 
-set(srcs
+AddSourcesToTarget(Exchain
     main.cpp
 )
-
-AddSourcesToTarget(srcs Exchain)
