@@ -1,35 +1,76 @@
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
 #include <iostream>
-#include <random>
-#include <cassert>
 #include <stdexcept>
+#include <fstream>
+#include <string>
+#include <cerrno>
 #include "mchain/mchain.h"
+#include "utilities/files.h"
 
-#define ARR2D_COLS(x) (sizeof((x)[0]) / sizeof((x)[0][0]))
-#define ARR2D_ROWS(x) (sizeof((x)) / sizeof((x)[0]))
+#define W_WIDTH 800
+#define W_HEIGHT 600
 
-int main()
+void glfw_err_callback(int errcode, const char *desc)
 {
-    double arr[][3] = {
-        { 0.9,     0.05,     0.05},
-        { 0.8,      0.1,      0.1},
-        { 0.5,      0.0,      0.5}
-    };
-    std::string names[] = {"sleep", "PHP", "food"};
+    std::cerr << "GLFW error(" << errcode << "): " << desc << std::endl;
+}
 
-    try {
-        MChain x(&arr[0][0], names, ARR2D_COLS(arr), 0);
-        int max_tries = 40;
-        std::cout << "Running simulation M.A.K.I.S. " << max_tries << " tries\n";
-        std::cout << "Initial state = (" << x.getCurrStateName() << ", " << x.getCurrState() << ")\n";
-        for (int i = 0; i < max_tries; i++) {
-            x();
-            std::cout << "Current state = (" << x.getCurrStateName() << ", " << x.getCurrState() << ")\n";
-        }
+void framebuffer_size_callback(GLFWwindow *window, int width, int height)
+{
+    glViewport(0, 0, width, height);
+}
 
-    } catch (const std::exception& e) {
-        std::cout << e.what() << '\n';
+void process_input(GLFWwindow *window)
+{
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+        glfwSetWindowShouldClose(window, true);
+    }
+}
+
+int main(int argc, char **argv)
+{
+    glfwSetErrorCallback(glfw_err_callback);
+
+    glfwInit();
+
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    //glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+
+    GLFWwindow * window = glfwCreateWindow(W_WIDTH, W_HEIGHT, "GLFW Window", NULL, NULL);
+    if (window == NULL) {
+        std::cerr << "Failed to create GLFW window" << std::endl;
+        glfwTerminate();
+        return -1;
     }
 
+    glfwMakeContextCurrent(window);
 
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+        std::cerr << "Failed to initialize GLAD" << std::endl;
+        glfwTerminate();
+        return -1;
+    }
+
+    glViewport(0, 0, W_WIDTH, W_HEIGHT);
+
+    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+
+    while (!glfwWindowShouldClose(window)) {
+        //input
+        process_input(window);
+
+        //rendering logic
+        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+
+        //event handling and backbuffering
+        glfwPollEvents();
+        glfwSwapBuffers(window);
+    }
+
+    glfwTerminate();
     return 0;
 }
