@@ -24,4 +24,4 @@ A C++14 compatible compiler and standard library.
 
 ## License
 
-See LICENSE.
+LICENSE applies to every file except for the `external` folder.
